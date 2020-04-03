@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "name": "Finans & Fastighet"
+      },
+      {
+        "id": 2,
+        "name": "Dagligvaror"
+      },
+      {
+        "id": 3,
+        "name": "Energi"
+      },
+      {
+        "id": 4,
+        "name": "Hälsovård"
+      },
+      {
+        "id": 5,
+        "name": "Industri"
+      },
+      {
+        "id": 6,
+        "name": "Informationsteknik"
+      },
+      {
+        "id": 7,
+        "name": "Material"
+      },
+      {
+        "id": 8,
+        "name": "Sällanköpsvaror"
+      },
+      {
+        "id": 9,
+        "name": "Telekommunikation"
+      },
+      {
+        "id": 10,
+        "name": "Kraftförsörjning"
+      }
+]

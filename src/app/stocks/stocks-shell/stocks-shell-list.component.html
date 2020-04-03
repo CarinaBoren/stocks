@@ -1,0 +1,40 @@
+<div class='card'>
+    <div class='card-header'>
+        {{pageTitle}}
+    </div>
+    <div class='card-body'>       
+        <div class='row'>
+            <div class='col-md-12'>
+                <img style='width:40px;margin:10px' src='/assets/images/flags/sweden.png' (click)="filterOnFlag('1')"/>
+                <img style='width:40px;margin:10px' src='/assets/images/flags/norway.png' (click)="filterOnFlag('2')"/>
+                <img style='width:40px;margin:10px' src='/assets/images/flags/finland.png' (click)="filterOnFlag('3')"/>
+                <img style='width:40px;margin:10px' src='/assets/images/flags/denmark.png' (click)="filterOnFlag('4')"/>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-12'>
+                <select class='select-option'  (change)='marketSelected($event)'>
+                    <option value='0'>Alla marknader</option>
+                    <option *ngFor='let market of filtredMarkets' value='{{market.id}}'>
+                      {{market.exchangeName}} - {{market.name}}
+                    </option>
+                  </select>    
+                  <br/>
+                  <select class='select-option' (change)='branchSelected($event)'>
+                    <option value='0'>Alla brancher</option>
+                    <option *ngFor='let branch of branches' value='{{branch.id}}'>
+                      {{branch.name}}
+                    </option>
+                  </select>   
+            </div>
+        </div>
+        <div>
+            <div class='list-group'>                
+
+                <a *ngFor='let stock of filtredStocks' (click) = 'onSelected(stock)'
+                style='cursor: pointer;'>
+                    {{stock.name}}</a>            
+            </div>
+        </div>
+    </div>
+</div>
