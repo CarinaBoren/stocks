@@ -58,9 +58,8 @@ export interface IReportYear {
 }
 // tslint:disable-next-line: no-empty-interface
 export interface IReportQuarter {
-
 }
-export interface IAllBranches{
+export interface IAllBranches {
     branches: IBranch[];
 }
 export interface IBranch {
@@ -89,18 +88,18 @@ export interface ISector {
     id: number;
     name: string;
 }
-export interface IAllCountries{
+export interface IAllCountries {
     countries: ICountry[];
 }
 export interface ICountry {
     id: number;
     name: string;
 }
-export interface IPortfolioItem{
+export interface IPortfolioItem {
     stock: IStock[];
     byeDate: string;
     price: number;
 }
-export interface IPortfolio{
+export interface IPortfolio {
     stocks: IPortfolioItem[];
 }
