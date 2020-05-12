@@ -2,7 +2,7 @@ import { Injectable, ɵNOT_FOUND_CHECK_ONLY_ELEMENT_INJECTOR } from '@angular/co
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable, throwError, of, combineLatest, forkJoin} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
-import { IAllStocks, IStock, IStockPriceList, IAllMarkets, IAllBranches, IAllCountries, IAllSectors, IAllKPI, IAllData, IOwnedStock } from './stocks';
+import { IAllStocks, IStock, IStockPriceList, IAllMarkets, IAllBranches, IAllCountries, IAllSectors, IAllKPI, IAllData } from './stocks';
 import { ConvertDatePipe } from '../shared/convert-date.pipe';
 
 @Injectable({
@@ -43,8 +43,7 @@ export class StockService {
         );
     }
 
-    getStockPricesByDateAndId(stockId: number, fromDate: Date): Observable<IStockPriceList>
-    {
+    getStockPricesByDateAndId(stockId: number, fromDate: Date): Observable<IStockPriceList> {
         const toDate = new Date();
         // const fromDate = new Date(toDate.getFullYear(), toDate.getMonth(), toDate.getDate() - 20);
         const toDateString = this.datePipe.transform(toDate.toString());
