@@ -12,7 +12,6 @@ export class StocksShellDetailComponent implements OnInit {
     return this.stockService.currentStock;
   }
   constructor(private stockService: StockService) { }
-
   ngOnInit() {
   }
 

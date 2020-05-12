@@ -18,6 +18,7 @@ export interface IStock {
     stockPrices?: IStockPrice[];
     kpi?: IKPI;
 }
+
 export interface IAllData {
     markets?: IAllMarkets;
     sectors?: IAllSectors;

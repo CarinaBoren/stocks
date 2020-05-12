@@ -1,0 +1,21 @@
+<div>
+    <div style="display: block" *ngIf='stockId'>
+        <button class="btn btn-info btn-sm" (click)="onClick(1)">1 vecka</button>
+        <button class="btn btn-info btn-sm" (click)="onClick(2)">1 månad</button>
+        <button class="btn btn-info btn-sm" (click)="onClick(3)">3 månader</button>
+        <button class="btn btn-info btn-sm" (click)="onClick(4)">6 månader</button>
+        <button class="btn btn-info btn-sm" (click)="onClick(5)">i år</button>
+        <button class="btn btn-info btn-sm" (click)="onClick(6)">1 år</button>
+        <button class="btn btn-info btn-sm" (click)="onClick(7)">3 år</button>
+        <button class="btn btn-info btn-sm" (click)="onClick(8)">5 år</button>
+        <button class="btn btn-info btn-sm" (click)="onClick(9)">10 år</button>
+        <button class="btn btn-info btn-sm" (click)="onClick(10)">max</button>
+      <canvas baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+      </canvas>
+    </div>
+  </div>

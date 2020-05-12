@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IStock, IMarket, IBranch, ICountry } from '../stocks';
+import { IStock, IMarket, IBranch, ICountry, ISector } from '../stocks';
 import { CriteriaComponent } from 'src/app/shared/criteria/criteria.component';
 import { StockParameterService } from '../stock-parameter.service';
 import { StockService } from '../stock.service';
+import { forkJoin, Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'pm-stocks-shell-list',
@@ -18,6 +20,8 @@ export class StocksShellListComponent implements OnInit {
 
   branches: IBranch[] = [];
   countries: ICountry[] = [];
+  sectors: ISector[] = [];
+
   errorMessage: string;
   @ViewChild(CriteriaComponent, {static: false}) filterComponent: CriteriaComponent;
   get showCountry(): string {
@@ -32,37 +36,30 @@ export class StocksShellListComponent implements OnInit {
 }
 
   ngOnInit(): void {
-    this.stockService.getAllStocks().subscribe({
-      next: allstocks => {
-        this.stocks = allstocks.instruments;
-        this.stockService.getAllMarkets().subscribe({
-          next: markets => {
-            this.markets = markets.markets;
-            this.filtredMarkets = this.markets;
-            this.stockService.getAllBranches().subscribe({
-              next: allBranches => {
-              this.branches = allBranches.branches;
-              this.stockService.getAllCountries().subscribe({
-                next: allCountries => {
-                  this.countries = allCountries.countries;
-                },
-                error: err => this.errorMessage = err
-                });
-              },
-              error: err => this.errorMessage = err
-            });
-          },
-          error: err => this.errorMessage = err
-        });
-        if (this.filterComponent) {
-        this.filterComponent.listFilter = this.stockParameterService.filterBy;
-        } else {
-        this.performFilter();
-        }
-      },
-      error: err => this.errorMessage  = err
-    });
+    this.initAllValues();
 }
+initStocks(): void {
+  forkJoin([
+    this.stockService.getAllSectors(),
+    this.stockService.getAllStocks()])
+  .subscribe(response => {
+    this.sectors = response[0].sectors;
+    this.stocks = response[1].instruments;
+  });
+}
+initAllValues(): void {
+  forkJoin([
+    this.stockService.getAllBranches(),
+    this.stockService.getAllCountries(),
+    this.stockService.getAllMarkets()])
+  .subscribe(response => {
+    this.branches = response[0].branches;
+    this.countries = response[1].countries;
+    this.markets = response[2].markets;
+  });
+}
+
+
 marketSelected(event: any) {
   this.stockParameterService.marketId = event.target.value;
   this.performFilter();
@@ -84,6 +81,7 @@ filterOnFlag(flagId: string): void {
   stock.market  = this.markets.find(item => item.id === stock.marketId);
   stock.branch  = this.branches.find(item => item.id === stock.branchId);
   stock.country = this.countries.find(item => item.id === stock.countryId);
+  stock.sector = this.sectors.find(item => item.id ===  stock.sectorId);
   this.stockService.getStockPricesById(stock.insId).subscribe({
     next: stockPrices => {
       stock.stockPrices = stockPrices.stockPricesList;
@@ -92,6 +90,9 @@ filterOnFlag(flagId: string): void {
   this.stockService.currentStock = stock;
  }
 performFilter(): void {
+  if (this.stocks.length === 0) {
+    this.initStocks();
+  }
   const filterObject = {
       filterby: this.stockParameterService.filterBy,
       flagId :  this.stockParameterService.showCountry,

@@ -26,9 +26,13 @@
                     <div class='col-md-3'>Branch:</div>
                     <div class='col-md-9'>{{stock.branch.name}}</div>
                 </div>                
+                <div class='row'>
+                    <div class='col-md-3'>Sektor:</div>
+                    <div class='col-md-9'>{{stock.sector.name}}</div>
+                </div>                
             </div>
         </div>
-        <table class='table' >
+<!--         <table class='table' >
             <thead>
             <tr>
                 <th>Datum</th>
@@ -47,6 +51,9 @@
                 <td>{{price.l}}</td>
             </tr>
         </tbody>
-        </table>
+        </table> -->
+    </div>
+    <div>
+        <pm-line-chart [stockId]='stock.insId'></pm-line-chart>
     </div>
 </div>

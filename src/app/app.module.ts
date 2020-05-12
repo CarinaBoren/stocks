@@ -7,7 +7,7 @@ import {RouterModule} from '@angular/router';
 import { AppComponent } from './app.component';
 import { StockListComponent } from './stocks/stock-list.component';
 import { ConvertDatePipe } from './shared/convert-date.pipe';
-import { FlagComponent } from './shared/flag.component';
+import { FlagComponent } from './shared/flag/flag.component';
 import { StockDetailComponent } from './stocks/stock-detail.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { StockDetailGuard } from './stocks/stock-detail.guard';
@@ -18,6 +18,12 @@ import { StocksShellComponent } from './stocks/stocks-shell/stocks-shell.compone
 import { StocksShellDetailComponent } from './stocks/stocks-shell/stocks-shell-detail.component';
 import { StocksShellListComponent } from './stocks/stocks-shell/stocks-shell-list.component';
 import { SwedenComponent } from './stocks/sweden/sweden.component';
+import { ChartsModule } from 'ng2-charts';
+import { BarChartComponent } from './shared/charts/bar-chart/bar-chart.component';
+import { DoughnutChartComponent } from './shared/charts/doughnut-chart/doughnut-chart.component';
+import { RadarChartComponent } from './shared/charts/radar-chart/radar-chart.component';
+import { PieChartComponent } from './shared/charts/pie-chart/pie-chart.component';
+import { LineChartComponent } from './shared/charts/line-chart/line-chart.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +38,12 @@ import { SwedenComponent } from './stocks/sweden/sweden.component';
     StocksShellComponent,
     StocksShellDetailComponent,
     StocksShellListComponent,
-    SwedenComponent
+    SwedenComponent,
+    BarChartComponent,
+    DoughnutChartComponent,
+    RadarChartComponent,
+    PieChartComponent,
+    LineChartComponent
   ],
   providers: [
     StockParameterService,
@@ -40,6 +51,7 @@ import { SwedenComponent } from './stocks/sweden/sweden.component';
   ],
   imports: [
     BrowserModule,
+    ChartsModule,
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot([
