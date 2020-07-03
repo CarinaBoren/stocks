@@ -1,59 +1,42 @@
-<div class='card' *ngIf='stock'>
-    <div class='card-header'>
-        {{stock.name}}
+<div class="card" *ngIf="stock">
+  <div class="card-header">
+    {{ stock.name }}
+  </div>
+  <div class="card">
+    <div class="row">
+      <div class="col-md-12">
+        <sm-flag [flagId]="stock.countryId"></sm-flag>
+      </div>
     </div>
-    <div class='card'>
-        <div class='row'>
-            <div class='col-md-12'>
-                <sm-flag [flagId]='stock.countryId'></sm-flag>
-            </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-3">Aktie:</div>
+          <div class="col-md-9">{{ stock.name }}</div>
         </div>
-        <div class='row'>
-                    <div class='col-md-12'>
-                <div class='row'>
-                    <div class='col-md-3'>Aktie:</div>
-                    <div class='col-md-9'>{{stock.name}}</div>
-                </div>
-                <div class='row'>
-                    <div class='col-md-3'>Ticker:</div>
-                    <div class='col-md-9'>{{stock.ticker}}</div>
-                </div>
-                <div class='row'>
-                    <div class='col-md-3'>Marknad:</div>
-                    <div class='col-md-9'>{{stock.market.name}}</div>
-                </div>
-                <div class='row'>
-                    <div class='col-md-3'>Branch:</div>
-                    <div class='col-md-9'>{{stock.branch.name}}</div>
-                </div>                
-                <div class='row'>
-                    <div class='col-md-3'>Sektor:</div>
-                    <div class='col-md-9'>{{stock.sector.name}}</div>
-                </div>                
-            </div>
+        <div class="row">
+          <div class="col-md-3">Ticker:</div>
+          <div class="col-md-9">{{ stock.ticker }}</div>
         </div>
-<!--         <table class='table' >
-            <thead>
-            <tr>
-                <th>Datum</th>
-                <th>Open</th>
-                <th>Close</th>
-                <th>High</th>
-                <th>Low</th>            
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor='let price of stock?.stockPrices'>
-                <td>{{price.d}}</td>
-                <td>{{price.o}}</td>
-                <td>{{price.c}}</td>
-                <td>{{price.h}}</td>
-                <td>{{price.l}}</td>
-            </tr>
-        </tbody>
-        </table> -->
+        <div class="row">
+          <div class="col-md-3">Marknad:</div>
+          <div class="col-md-9">{{ stock.market.name }}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">Branch:</div>
+          <div class="col-md-9">{{ stock.branch.name }}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">Sektor:</div>
+          <div class="col-md-9">{{ stock.sector.name }}</div>
+        </div>
+      </div>
     </div>
-    <div>
-        <pm-line-chart [stockId]='stock.insId'></pm-line-chart>
-    </div>
+  </div>
+  <div>
+    <pm-line-chart [stockId]="stock.insId"></pm-line-chart>
+  </div>
+  <div *ngFor="let kpi of stock.allKpi.kpis">
+    <pm-bar-chart [stock]="stock" [kpi]="kpi"></pm-bar-chart>
+  </div>
 </div>

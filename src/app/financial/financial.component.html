@@ -1,0 +1,32 @@
+<p>financial works!</p>
+<ejs-rangenavigator></ejs-rangenavigator>
+<ejs-chart id="chart-container" [primaryXAxis]="primaryXAxis">
+  <e-series-collection>
+    <e-series
+      [dataSource]="stockData"
+      yAxisName="secondary"
+      width="2"
+      type="Column"
+      xName="x"
+      yName="volumn"
+    >
+    </e-series>
+    <e-series
+      [dataSource]="stockData"
+      width="2"
+      type="Candle"
+      xName="x"
+      yName="close"
+      high="high"
+      low="low"
+      open="open"
+      close="close"
+      volume="volume"
+      name="Apple Inc"
+      bearFillColor="#2ecd71"
+      bullFillColor="#e74c3d"
+    >
+    </e-series>
+  </e-series-collection>
+  <ejs-chart></ejs-chart
+></ejs-chart>

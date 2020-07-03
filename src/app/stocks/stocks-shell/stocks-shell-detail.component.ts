@@ -8,7 +8,7 @@ import { IStock } from '../stocks';
 })
 export class StocksShellDetailComponent implements OnInit {
 
-  get stock(): IStock |null{
+  get stock(): IStock |null {
     return this.stockService.currentStock;
   }
   constructor(private stockService: StockService) { }

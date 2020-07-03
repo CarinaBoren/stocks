@@ -1,40 +1,96 @@
-<div class='card'>
-    <div class='card-header'>
-        {{pageTitle}}
+<div class="card">
+  <div class="card-header">
+    {{ pageTitle }}
+  </div>
+  <img src="/assets/icons/monochrome_photos-24px.svg" />
+  <div class="card-body">
+    <div class="row">
+      <div>Välj ett land</div>
+      <div class="col-md-12">
+        <img
+          style="width: 40px; margin: 10px;"
+          src="/assets/images/flags/sweden.png"
+          (click)="filterOnFlag('1')"
+        />
+        <img
+          style="width: 40px; margin: 10px;"
+          src="/assets/images/flags/norway.png"
+          (click)="filterOnFlag('2')"
+        />
+        <img
+          style="width: 40px; margin: 10px;"
+          src="/assets/images/flags/finland.png"
+          (click)="filterOnFlag('3')"
+        />
+        <img
+          style="width: 40px; margin: 10px;"
+          src="/assets/images/flags/denmark.png"
+          (click)="filterOnFlag('4')"
+        />
+      </div>
     </div>
-    <div class='card-body'>       
-        <div class='row'>
-            <div class='col-md-12'>
-                <img style='width:40px;margin:10px' src='/assets/images/flags/sweden.png' (click)="filterOnFlag('1')"/>
-                <img style='width:40px;margin:10px' src='/assets/images/flags/norway.png' (click)="filterOnFlag('2')"/>
-                <img style='width:40px;margin:10px' src='/assets/images/flags/finland.png' (click)="filterOnFlag('3')"/>
-                <img style='width:40px;margin:10px' src='/assets/images/flags/denmark.png' (click)="filterOnFlag('4')"/>
-            </div>
-        </div>
-        <div class='row'>
-            <div class='col-md-12'>
-                <select class='select-option'  (change)='marketSelected($event)'>
-                    <option value='0'>Alla marknader</option>
-                    <option *ngFor='let market of filtredMarkets' value='{{market.id}}'>
-                      {{market.exchangeName}} - {{market.name}}
-                    </option>
-                  </select>    
-                  <br/>
-                  <select class='select-option' (change)='branchSelected($event)'>
-                    <option value='0'>Alla brancher</option>
-                    <option *ngFor='let branch of branches' value='{{branch.id}}'>
-                      {{branch.name}}
-                    </option>
-                  </select>   
-            </div>
-        </div>
-        <div>
-            <div class='list-group'>                
-
-                <a *ngFor='let stock of filtredStocks' (click) = 'onSelected(stock)'
-                style='cursor: pointer;'>
-                    {{stock.name}}</a>            
-            </div>
-        </div>
+    <div class="row"></div>
+    <div class="row">
+      <div class="col-md-12">
+        <select
+          *ngIf="markets"
+          class="select-option"
+          (change)="marketSelected($event)"
+        >
+          <option value="0">Alla marknader</option>
+          <option *ngFor="let market of filtredMarkets" value="{{ market.id }}">
+            {{ market.exchangeName }} - {{ market.name }}
+          </option>
+        </select>
+        <br />
+        <select
+          *ngIf="sectors"
+          class="select-option"
+          (change)="sectorSelected($event)"
+        >
+          <option value="0">Alla Sektorer</option>
+          <option *ngFor="let sector of sectors" value="{{ sector.id }}">
+            {{ sector.name }}
+          </option>
+        </select>
+        <br />
+        <select
+          *ngIf="branches"
+          class="select-option"
+          (change)="branchSelected($event)"
+        >
+          <option value="0">Alla brancher</option>
+          <option
+            *ngFor="let branch of filtredBranches"
+            value="{{ branch.id }}"
+          >
+            {{ branch.name }}
+          </option>
+        </select>
+      </div>
     </div>
+    <div class="row">
+      <select
+        *ngIf="allKpis"
+        class="select-option"
+        (change)="kpiSelected($event)"
+      >
+        <option value="0">Alla KPI:er</option>
+        <option *ngFor="let kpi of allKpis" value="{{ kpi.kpiId }}">
+          {{ kpi.nameSv }}
+        </option>
+      </select>
+    </div>
+    <div>
+      <div class="list-group">
+        <a
+          *ngFor="let stock of filtredStocks"
+          (click)="onSelected(stock)"
+          style="cursor: pointer;"
+        >
+          {{ stock.name }}</a
+        >
+      </div>
+    </div>
+  </div>
 </div>

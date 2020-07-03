@@ -1,27 +1,47 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from "@angular/core";
+import { StockService } from "src/app/stocks/stock.service";
+import {
+  IStock,
+  IStockKpis,
+  IKpiForStock,
+  IKpiListItem,
+} from "src/app/stocks/stocks";
+import { StockParameterService } from "src/app/stocks/stock-parameter.service";
 
 @Component({
-  selector: 'pm-bar-chart',
-  templateUrl: './bar-chart.component.html',
-  styleUrls: ['./bar-chart.component.css']
+  selector: "pm-bar-chart",
+  templateUrl: "./bar-chart.component.html",
+  styleUrls: ["./bar-chart.component.css"],
 })
-export class BarChartComponent implements OnInit {
-
-  constructor() { }
-
+export class BarChartComponent implements OnChanges {
+  constructor(
+    private stockService: StockService,
+    private stockParameterService: StockParameterService
+  ) {}
+  @Input() stock: IStock;
+  @Input() kpi: IKpiForStock;
+  kpiId: string;
   public barChartOption = {
     scaleShowVerticalLines: false,
-    responsive: true
+    responsive: true,
   };
-  public barChartLabels = ['2006','2007','2008','2009','2010','2011','2012'];
-  public barChartType = 'bar';
-  public barChartLegend = false;
-  public barChartData = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A', fill: false},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
-  ];
+  currentStock: IStock;
+  //  kpis: IKpiForStock;
+  public barChartLabels = [];
+  public barChartType = "bar";
+  public barChartLegend = true;
+  public barChartData = [];
+  public barChartOptions = {};
 
-  ngOnInit() {
+  ngOnChanges(): void {
+    this.currentStock = this.stockService.currentStock;
+    this.kpiId = this.stockParameterService.kpiId;
+    this.barChartData = [];
+
+    this.barChartLabels = this.kpi.values.map((x) => x.y.toString());
+    this.barChartData.push({
+      data: this.kpi.values.map((v) => v.v),
+      label: this.kpi.kpiname,
+    });
   }
-
 }

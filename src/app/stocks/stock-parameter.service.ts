@@ -1,12 +1,15 @@
-import { Injectable} from '@angular/core';
+import { Injectable } from "@angular/core";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: "root",
 })
 export class StockParameterService {
-    showCountry: string;
-    filterBy: string;
-    marketId: string;
-    branchId: string;
-    constructor() {}
+  showCountry: string;
+  filterBy: string;
+  marketId: string;
+  sectorId: string;
+  branchId: string;
+  kpiId: string;
+  kpiValue: string;
+  constructor() {}
 }
